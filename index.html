@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Protótipo</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    
+    <div class="top-pagina">
+        <div class="estilo corPrimaria" id="saldo">
+            <h2 class="container" id="esqueletoSaldo">R$ <h2 class="container" data-visible="1" id="valorCaixa">0.00</h2> </h2> <img  id="view" src="img/eye-regular.svg" alt="view" onclick="view()">
+        </div>
+        <div class="estilo corPrimaria" id="home" onclick="fecharComanda()"><img src="img/casa.png"  id="imgHome"></div>
+    </div>
+    
+
+    <div id="pai">
+        <div class="corSecundaria" id="telaPrincipal">
+            <h1>Menu Principal</h1>
+        </div>
+
+        <div class="menus corSecundaria alignProdutos ocultar" id="produtos">
+            <div class="top-menu tituloComanda"><p>Produtos</p></div>
+            <button id="1" onclick="produto.opcoes(id)"> Açaí no Peso </button>
+            <button id="2" data-nome="Milkshake" onclick="produto.opcoes(id)" > Milkshake </button>
+            <button id="3" data-nome="Acaí" data-descricao="350ml" data-preco="14.00" onclick="produto.opcoes(id)"> Açaí 350ml </button>
+            <button id="4" data-nome="Açaí" data-descricao="500ml" data-preco="21.00" onclick="produto.opcoes(id)"> Açaí 500ml </button>
+            <button id="5" data-nome="Açaí" data-descricao="700ml" data-preco="27.00" onclick="produto.opcoes(id)"> Açaí 700ml </button>
+            <button id="6" data-nome="Açaí" data-descricao="1000ml" data-preco="38.00" onclick="produto.opcoes(id)"> Açaí 1000ml </button>
+            
+        </div>
+        <div class="menus alignProdutos corSecundaria ocultar" id="pesoAcai">
+            <div class="top-menu"><h1>PESO DO AÇAI</h1></div>
+            <div id="erro"></div>
+            <div><h1 style="color: rgba(99, 30, 87, 0.87);">DIGITE O PESO</h1></div>
+            
+            <input id="inpt1" type="number" placeholder="Ex.: 1000" style="margin-bottom: 20px;">
+            <div>
+
+                <button id="7" class="btnEnv corPrimaria" onclick="produto.opcoes(id)">Enviar Peso</button>
+                
+                <button id="8" class="btnCan" onclick="produto.opcoes(id)"> Cancelar</button>
+            </div>
+        </div>
+        
+        <div id="listaComandas">
+            <div class="corPrimaria adicionar btnAddComanda" data-clicado="0" id="btnAdicionar" onclick="opcoesBtnComanda(id)">
+                <p>Adicionar</p>
+                <div id="iconeAdd">+</div>
+            </div>
+            <div class="adicionar corCancelar btnAddComanda"  id="btnCancelar" onclick="opcoesBtnComanda(id)">
+                <p>Cancelar</p>
+                <div id="iconeAdd">-</div>
+            </div>
+        </div>
+        <div class="ocultar" id="finalizar">
+            <div><h1>FECHAMENTO DA COMANDA</h1>
+                <div id="conteudoFinalizar">
+                    <div>
+                        <div class="corpoDiv" id="divPagamento">
+                            <div><h2>FORMA DE PAGAMENTO</h2></div>
+                            <div id="containerButtons">
+                                <div style="display: flex;">
+                                    <button id="btnDinheiro" onclick="produto.formaDePagamento(id)" style="display: flex;"> <img class="icones" src="img/dinheiro.png" ><p class="nomesPagamentos">Dinheiro</p></button>
+                                    <button id="btnPix" onclick="produto.formaDePagamento(id)" style="display: flex;"> <img class="icones" src="img/pix.webp" ><p class="nomesPagamentos">Pix</p></button>
+                                </div>
+                                <div style="display: flex;">
+                                    <button id="btnCartao" onclick="produto.formaDePagamento(id)" style="display: flex;"> <img class="icones" src="img/cartao.png" ><p class="nomesPagamentos">Cartão</p></button>
+                                    <button id="btniFood" onclick="produto.formaDePagamento(id)" style="display: flex;"> <img class="icones" src="img/ifood.png" ><p class="nomesPagamentos">iFood</p></button>
+                                </div>
+                                <div style="display: flex;">
+                                    <button id="btnFidelidade" onclick="produto.formaDePagamento(id)" style="display: flex;"> <img class="icones" src="img/cartao-de-fidelidade.png" ><p class="nomesPagamentos">Fidelidade</p></button>
+                                </div>
+                            </div>
+                            <div id="containerPagamentos">
+                                <input type="number" id="inputDescontar" placeholder="Ex.: R$ 7.06">
+                            </div>
+                        </div>
+                        <div id="btnDescontar" onclick="produto.opcoesComanda(id)"><h2>Descontar</h2> </div>
+                    </div> 
+                    <div id="localResumos">
+
+                    </div>
+                    <div class="corPrimaria" id="btnVoltar" onclick="produto.opcoesComanda(id)"><h2>Voltar</h2></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="estiloCor corSecundaria ocultar" id="menuCriarComanda">
+        <h1 id="nomeComanda" data-type="Balcão"></h1>
+        <div>
+            <button id="typeBalcao" onclick="opcoesBtnComanda(id)">Balcão</button>
+            <button id="typeDelivery" onclick="opcoesBtnComanda(id)">Delivery</button>
+            <button id="typeRetirada" onclick="opcoesBtnComanda(id)">Retirada</button>
+        </div>
+        <div><input type="text" id="inputNomeComanda" placeholder="Nome da Comanda (opcional)" maxlength="14"></div>
+        
+
+    </div>
+    <p id="version">Versão 1.0</p>
+</body>
+<script>
+    function view(){
+        var visible = document.getElementById("valorCaixa").dataset.visible
+        if (visible==1){
+            document.getElementById("valorCaixa").dataset.visible = 0;
+            document.getElementById("valorCaixa").innerText = "-----"
+            document.getElementById("view").src = "img/eye-slash-regular.svg"
+        }
+        if (visible==0){
+            var valorCaixa = atualizarTotalCaixa();
+            document.getElementById("valorCaixa").dataset.visible = 1;
+            document.getElementById("view").src = "img/eye-regular.svg"
+        }
+    }
+
+    function atualizarTotalCaixa(){
+        var valorCaixa = 0;
+        for(let i=0; i<produto.descontados.length; i++){
+                valorCaixa += parseFloat(produto.descontados[i].inputDescontar);
+            }
+            valorCaixa = parseFloat(valorCaixa).toFixed(2)
+            document.getElementById("valorCaixa").innerText = valorCaixa
+            return valorCaixa;
+    }
+
+    function abrirResumo(){
+        document.getElementById("finalizar").classList.remove('ocultar');
+        document.getElementById("produtos").classList.add('ocultar');
+        document.getElementById(idUltimaComanda).classList.add('ocultar');
+        document.getElementById('div1-resumo-'+idUltimaComanda).classList.remove('ocultar');
+        opcoesBtnComanda('outrosBtn');
+    }
+
+    function fecharResumo(){
+        document.getElementById("finalizar").classList.add('ocultar');
+        document.getElementById("produtos").classList.remove('ocultar');
+        document.getElementById(idUltimaComanda).classList.remove('ocultar');
+        document.getElementById('div1-resumo-'+idUltimaComanda).classList.add('ocultar');
+        opcoesBtnComanda('outrosBtn');
+    }
+
+    function fecharComanda(){
+        var id = idUltimaComanda;
+        document.getElementById("finalizar").classList.add('ocultar');
+        document.getElementById("produtos").classList.add('ocultar');
+        document.getElementById("pesoAcai").classList.add('ocultar');
+        document.getElementById(id).classList.add('ocultar');
+        document.getElementById("telaPrincipal").classList.remove('ocultar')
+        opcoesBtnComanda('outrosBtn');
+        document.getElementById('div1-resumo-'+idUltimaComanda).classList.add('ocultar');
+        idUltimaComanda = 'nenhum'
+    }
+    var idUltimaComanda = 'nenhum';
+
+    function abrirComanda(idComanda){
+        var id = idComanda.id;
+        document.getElementById("produtos").classList.remove('ocultar');
+        document.getElementById(id).classList.remove('ocultar');
+        document.getElementById("telaPrincipal").classList.add('ocultar');
+        document.getElementById("finalizar").classList.add('ocultar');
+        if (idUltimaComanda!='nenhum'){
+            document.getElementById(idUltimaComanda).classList.add('ocultar');
+            document.getElementById('div1-resumo-'+idUltimaComanda).classList.add('ocultar');
+        }
+        if(id == idUltimaComanda){
+            fecharComanda();
+            idUltimaComanda = 'nenhum';
+            opcoesBtnComanda('outrosBtn');
+            return 0;
+        }
+        idUltimaComanda = id;
+        opcoesBtnComanda('outrosBtn');
+    }
+    var numBalcao = 1;
+    var numDelivery = 1;
+    var numRetirada = 1;
+    var numComanda = 1;
+    var qntComandas = 0;
+    function opcoesBtnComanda(id){
+        document.getElementById('nomeComanda').innerText = 'Defina o tipo de comanda:'
+        var clicado = document.getElementById("btnAdicionar").dataset.clicado;
+        if(id=='btnAdicionar' && clicado == '0'){
+            document.getElementById('menuCriarComanda').classList.remove('ocultar');
+            document.getElementById("btnAdicionar").dataset.clicado=1;
+        }
+        if(id=='btnAdicionar' && clicado == '1'){
+            criarComanda();
+            document.getElementById('menuCriarComanda').classList.add('ocultar');
+            document.getElementById("btnAdicionar").dataset.clicado=0;
+        }
+        if(id=='btnCancelar' && clicado == '1'){
+            document.getElementById('menuCriarComanda').classList.add('ocultar');
+            document.getElementById("btnAdicionar").dataset.clicado=0;
+        }
+        if(id=='btnCancelar' && clicado == '0'){
+            excluirComanda();
+        }
+        if(id=='outrosBtn'){
+            document.getElementById('menuCriarComanda').classList.add('ocultar');
+            document.getElementById("btnAdicionar").dataset.clicado=0;
+        }
+        
+        if(id=='typeBalcao'){
+            document.getElementById('nomeComanda').innerText = 'Balcão '+ numBalcao;
+            document.getElementById('nomeComanda').dataset.type = 'Balcão';
+        }
+        if(id=='typeDelivery'){
+            document.getElementById('nomeComanda').innerText = 'Delivery ' + numDelivery;
+            document.getElementById('nomeComanda').dataset.type = 'Delivery';
+        }
+        if(id=='typeRetirada'){
+            document.getElementById('nomeComanda').innerText = 'Retirada ' + numRetirada;         
+            document.getElementById('nomeComanda').dataset.type = 'Retirada';
+        }
+    }
+
+    function criarPaginaComanda(nomeCliente,typeComanda,contadorTypeComanda){
+        //criando a paginaComanda
+        let div1 = document.createElement('div');
+        let div2 = document.createElement('div');
+        let div3 = document.createElement('div');
+        let div4 = document.createElement('div');
+        let div5 = document.createElement('div');
+        let div6 = document.createElement('div');
+        let div7 = document.createElement('div');
+        let p0 = document.createElement('p');
+        let p1 = document.createElement('p');
+        let p2 = document.createElement('p');
+        let p3 = document.createElement('p');
+        let button = document.createElement('button');
+        div1.classList = 'menus comanda corSecundaria ocultar';
+        div1.id = 'Comanda'+numComanda;
+        div2.id = 'div2-'+numComanda;
+        div3.id = 'div3-'+numComanda;
+        div4.id = 'div4-'+numComanda;
+        div5.id = 'div5-'+numComanda;
+        div6.id = 'div6-'+numComanda;
+        div7.id = 'div7-'+numComanda;
+        div2.classList = 'top-menu';
+        div3.classList = 'bot-menu';
+        div6.classList = 'estiloTextComanda';
+        div2.classList = 'container';
+        p0.classList = 'tituloComanda'
+        p0.textContent = nomeCliente.textContent + ' ' + typeComanda.textContent + ' ' + contadorTypeComanda.textContent ;
+        p1.textContent = 'Total da comanda';
+        p2.textContent = 'R$ ';
+        p3.id = div1.id+'-total';
+        p3.textContent = '0.00';
+        button.classList = 'finalizarComanda'
+        button.setAttribute('onclick', 'abrirResumo()');
+        button.textContent = 'Fechamento da Comanda'
+        document.getElementById('pai').appendChild(div1)
+        document.getElementById(div1.id).appendChild(div2)
+        document.getElementById(div1.id).appendChild(div3)
+        document.getElementById(div3.id).appendChild(div4)
+        document.getElementById(div4.id).appendChild(div5)
+        document.getElementById(div4.id).appendChild(div6)
+        document.getElementById(div3.id).appendChild(div7)
+        document.getElementById(div2.id).appendChild(p0)
+        document.getElementById(div5.id).appendChild(p1)
+        document.getElementById(div6.id).appendChild(p2)
+        document.getElementById(div6.id).appendChild(p3)
+        document.getElementById(div7.id).appendChild(button)
+        abrirComanda(div1)
+        return div1.id;
+
+    }
+    
+    function criarPaginaFinalizarComanda(){
+        let div1 = document.createElement('div');
+        let div2 = document.createElement('div');
+        let div3 = document.createElement('div');
+        let div4 = document.createElement('div');
+        let div5 = document.createElement('div');
+        let div6 = document.createElement('div');
+        let div7 = document.createElement('div');
+        let div8 = document.createElement('div');
+        let div9 = document.createElement('div');
+        let div10 = document.createElement('div');
+        let div11 = document.createElement('div');
+        let div12 = document.createElement('div');
+        div1.id = 'div1-resumo-Comanda'+numComanda; // ID da div toda
+        div2.id = 'div2-resumo-'+numComanda;
+        div3.id = 'div3-resumo-'+numComanda;
+        div4.id = 'div4-resumo-Comanda'+numComanda; // ID da div que fica com as divs itens-linha da comanda. tem uma div class='linha' dentro disso -> <p>3x</p> <- isso é a quantida de itens. <p>Açaí 500ml</p> <- Nome do Produto.
+        div5.id = 'div5-resumo-'+numComanda;
+        div6.id = 'div6-resumo-Comanda'+numComanda; // ID da div que fica com os valores dos produtos da div4
+        div7.id = 'div7-resumo-'+numComanda;
+        div8.id = 'div8-resumo-'+numComanda;
+        div9.id = 'div9-resumo-Comanda'+numComanda; // ID da div que possui o nome da forma de pagamento
+        div10.id = 'div10-resumo-Comanda'+numComanda; //ID da div que possui os valores descontados
+        div11.id = 'div11-resumo-'+numComanda;
+        div12.id = 'div12-resumo-'+numComanda;
+        let tituloDiv = document.createElement('h2');
+        let p1 = document.createElement('p');
+        let p2 = document.createElement('p');
+        let p3 = document.createElement('p');
+        let p4 = document.createElement('p');
+        let p5 = document.createElement('p');
+        let p6 = document.createElement('p');
+        p6.id = 'id-total-aberto-Comanda'+numComanda; //ID TOTAL EM ABERTO
+        p3.id = 'id-total-Comanda'+numComanda; //ID TOTAL DA COMANDA
+        div1.classList = 'corpoDiv divTotal ocultar';
+        div3.classList = 'estiloResumo';
+        div4.classList = 'estiloResumoEsquerda';
+        div5.classList = 'totalComanda';
+        div6.classList = 'estiloResumoDireita';
+        div7.classList = 'totalComanda linha';
+        div8.classList = 'estiloResumo debitados';
+        div9.classList = 'estiloResumoEsquerda';
+        div10.classList = 'estiloResumoDireita';
+        div11.classList = 'bot-menu-resumo';
+        div12.classList = 'linha';
+        tituloDiv.textContent = 'Resumo';
+        p1.textContent = 'Total da Comanda';
+        p2.textContent = 'R$';
+        p3.textContent = '0.00';
+        p4.textContent = 'Total em aberto:';
+        p5.textContent = 'R$';
+        p6.textContent = '0.00';
+        document.getElementById("localResumos").appendChild(div1);
+        document.getElementById(div1.id).appendChild(div2);
+        document.getElementById(div1.id).appendChild(div3);
+        document.getElementById(div1.id).appendChild(div8);
+        document.getElementById(div1.id).appendChild(div11);
+        document.getElementById(div2.id).appendChild(tituloDiv);
+        document.getElementById(div3.id).appendChild(div4);
+        document.getElementById(div8.id).appendChild(div9);
+        document.getElementById(div8.id).appendChild(div10);
+        document.getElementById(div11.id).appendChild(p4);
+        document.getElementById(div11.id).appendChild(div12);
+        document.getElementById(div12.id).appendChild(p5);
+        document.getElementById(div12.id).appendChild(p6);
+        document.getElementById(div4.id).appendChild(div5);
+        document.getElementById(div3.id).appendChild(div6);
+        document.getElementById(div6.id).appendChild(div7);
+        document.getElementById(div5.id).appendChild(p1);
+        document.getElementById(div6.id).appendChild(div7);
+        document.getElementById(div7.id).appendChild(p2);
+        document.getElementById(div7.id).appendChild(p3);
+    }
+
+    function criarComanda(){
+        var width = document.getElementById('listaComandas').offsetWidth;
+        width += 110;
+        document.getElementById('listaComandas').style.width = width+'px';
+        let btnNovaComanda = document.createElement('div');
+        btnNovaComanda.classList = 'btnComanda';
+        var idbtnComanda = 'btnComanda'+numComanda;
+        btnNovaComanda.id = idbtnComanda;
+        let contadorTypeComanda = document.createElement('h3')
+        if(document.getElementById('nomeComanda').dataset.type=='Balcão')
+        {
+            contadorTypeComanda.textContent = numBalcao;
+            numBalcao++;
+        }
+        if(document.getElementById('nomeComanda').dataset.type=='Delivery')
+        {
+            contadorTypeComanda.textContent = numDelivery;
+            numDelivery++;
+        }
+        if(document.getElementById('nomeComanda').dataset.type=='Retirada')
+        {
+            contadorTypeComanda.textContent = numRetirada;
+            numRetirada++;
+        }
+        let typeComanda = document.createElement('p');
+        typeComanda.textContent = document.getElementById('nomeComanda').dataset.type;
+        let nomeCliente = document.createElement('p');
+        nomeCliente.textContent = document.getElementById('inputNomeComanda').value;
+        var idComanda = criarPaginaComanda(nomeCliente,typeComanda,contadorTypeComanda);
+        btnNovaComanda.setAttribute("onclick", "abrirComanda(" +idComanda+ ")")
+        document.getElementById('inputNomeComanda').value = '';
+        document.getElementById('nomeComanda').dataset.type = 'Balcão';
+        document.getElementById('listaComandas').appendChild(btnNovaComanda)
+        document.getElementById(idbtnComanda).appendChild(typeComanda);
+        document.getElementById(idbtnComanda).appendChild(contadorTypeComanda);
+        document.getElementById(idbtnComanda).appendChild(nomeCliente);
+        criarPaginaFinalizarComanda();
+        numComanda++;
+        qntComandas++;
+    }
+    function excluirComanda(){
+            if(qntComandas==0){
+                alert('Não há comandas abertas.');
+            }
+            else{
+                selecionarComanda();
+            }
+        }
+
+    function selecionarComanda(){
+        alert('oi');
+    }
+
+
+    var ultimaFormaPagamento = 0;
+    class Produto {
+
+        // Os ids que reservei para identificadores de comandas começa em 101. Ilimitado. Version 1.0.
+        constructor() {
+            this.id = 100;
+            this.position = 0;
+            this.arrayProdutos = [];
+            this.descontados = [];
+            this.numPagamentos = 0;
+        }
+        
+        // Os ids que reservei para botões no inicio deste programa foi de 1 à 10, mas não é limitado à isso. Caso necessário, utilizar até 100. Version 1.0.
+        opcoes(id) {
+            opcoesBtnComanda('outrosBtn');
+            if(id >2 && id<7){
+                this.salvarProduto(id);
+            }
+            if(id==1){
+                this.menuAcai();
+            }
+            if(id==2){
+                alert("Estamos trabalhando na áreado milkshake. Aguarde.")
+            }
+            if(id==7){
+                var condicional = this.salvarPeso(id);
+                if(condicional==1){
+                    this.salvarProduto(id);
+                }
+                
+            }
+            if(id==8){
+                this.cancelar();
+            }
+        }
+
+        salvarProduto(id){
+            let produto = this.lerDados(id);
+            this.adicionar(produto);
+            this.listaItens();
+            this.cancelar();
+            this.id++;
+            this.position++;
+        }
+
+        listaItens(){
+
+            var item = document.createElement("div");
+            var nomeItem = document.createElement("p");
+            var descricaoItem = document.createElement("p");
+            var precoItem = document.createElement("p");
+            var imgLixeira = document.createElement("img")
+            item.classList = "div-itens";
+            nomeItem.classList = "alignItens";
+            descricaoItem.classList = "alignItens";
+            precoItem.classList = "alignItens";
+            imgLixeira.classList = "alignItens";
+            imgLixeira.classList = "lixeira";
+            imgLixeira.src="img/trash-solid.svg";
+            item.id = produto.id;
+            var numArray = produto.position;
+            imgLixeira.setAttribute("onclick", "produto.excluir(" + produto.id + ")")
+            nomeItem.textContent = this.arrayProdutos[numArray].nomeProduto;
+            descricaoItem.textContent = this.arrayProdutos[numArray].descricao;
+            precoItem.textContent = "R$ "+ this.arrayProdutos[numArray].preco;
+            document.getElementById(idUltimaComanda).appendChild(item);
+            document.getElementById(item.id).appendChild(nomeItem);
+            document.getElementById(item.id).appendChild(descricaoItem);
+            document.getElementById(item.id).appendChild(precoItem);
+            document.getElementById(item.id).appendChild(imgLixeira);
+            this.atualizarPreco();
+            
+        }
+        adicionar(produto){
+            this.arrayProdutos.push(produto);
+            
+        }
+
+        lerDados(id) {
+            let produto = {}
+
+            produto.id = this.id;
+            produto.position = this.position;
+            produto.nomeProduto = document.getElementById(id).dataset.nome;
+            produto.descricao = document.getElementById(id).dataset.descricao;
+            produto.preco = document.getElementById(id).dataset.preco;
+            produto.idComanda = idUltimaComanda;
+            return produto;
+
+        }
+
+        cancelar() {
+            document.getElementById("produtos").classList.remove('ocultar');
+            document.getElementById("pesoAcai").classList.add('ocultar');
+            document.getElementById("inpt1").value = '';
+        }
+
+        menuAcai(id){
+            document.getElementById("produtos").classList.add('ocultar');
+            document.getElementById("pesoAcai").classList.remove('ocultar');
+        }
+
+        salvarPeso(id){
+            var pesoAcai = document.getElementById("inpt1").value;
+            if( pesoAcai > 0){
+                pesoAcai = document.getElementById("inpt1").value;
+                document.getElementById(id).dataset.descricao = pesoAcai+"g";
+                var valorPeso = 37.90;
+                var preco = parseFloat((pesoAcai/1000)*valorPeso).toFixed(2); 
+                document.getElementById(id).dataset.preco = preco;
+                document.getElementById(id).dataset.nome = "Açaí no peso";
+                return 1;
+            }
+            else{
+                var novoParagrafo = document.createElement("p")
+                novoParagrafo.textContent = "Por favor, informe um valor superior a 0.";
+                document.getElementById("erro").appendChild(novoParagrafo)
+                setTimeout(function() {
+                document.getElementById("erro").removeChild(novoParagrafo);
+                }, 3000)
+                return 0;
+            }
+        }
+        excluir(id){
+            document.getElementById(idUltimaComanda).removeChild(document.getElementById(id))
+            for(let i=0; i<this.arrayProdutos.length; i++){
+                var elemento = this.arrayProdutos[i].id;
+                if(elemento==id){
+                    this.arrayProdutos.splice(i,1);
+                }
+            }
+            this.atualizarPreco()
+            produto.position--;
+        }
+        
+        atualizarPreco(){
+            var total = 0;
+            var totalDescontados = 0;
+            for(let i=0; i < this.arrayProdutos.length; i++){
+                if(this.arrayProdutos[i].idComanda == idUltimaComanda)
+                total += parseFloat(this.arrayProdutos[i].preco)
+            }
+            total = ((total/100)*100).toFixed(2);
+            document.getElementById(idUltimaComanda+'-total').innerText = total;
+            document.getElementById('id-total-'+idUltimaComanda).innerText = total;
+            for(let i=0; i<produto.descontados.length; i++){
+                if(produto.descontados[i].idThisComanda==idUltimaComanda){
+                    totalDescontados += produto.descontados[i].valorDescontado;
+                }
+            }
+            var totalRestante = parseFloat(total - totalDescontados).toFixed(2);
+            document.getElementById('id-total-aberto-'+idUltimaComanda).innerText = totalRestante;
+            
+        }   
+
+        totalCaixa(){   
+            alert('oi')
+        }
+
+        formaDePagamento(id){
+            if('btnDinheiro' == id){
+                if(ultimaFormaPagamento == 0){
+                    document.getElementById(id).style.backgroundColor = 'green';
+                    document.getElementById(id).style.color = 'white';
+                    ultimaFormaPagamento = id;
+                    return 0;
+                }
+                if(ultimaFormaPagamento == id){
+                    document.getElementById(id).style.backgroundColor = 'rgb(236, 226, 234)';
+                    document.getElementById(id).style.color = 'rgb(73, 53, 67)';
+                    ultimaFormaPagamento = 0;
+                    return 0;
+                }
+                else {
+                    this.formaDePagamento(ultimaFormaPagamento)
+                    this.formaDePagamento(id);
+                    return 0;
+                }
+            }
+            if('btnPix' == id){
+                if(ultimaFormaPagamento == 0){
+                    document.getElementById(id).style.backgroundColor = 'rgb(17, 106, 116)';
+                    document.getElementById(id).style.color = 'rgb(184, 249, 252)';
+                    ultimaFormaPagamento = id;
+                    return 0;
+                }
+                if(ultimaFormaPagamento == id){
+                    document.getElementById(id).style.backgroundColor = 'rgb(236, 226, 234)';
+                    document.getElementById(id).style.color = 'rgb(73, 53, 67)';
+                    ultimaFormaPagamento = 0;
+                    return 0;
+                }
+                else {
+                    this.formaDePagamento(ultimaFormaPagamento)
+                    this.formaDePagamento(id);
+                    return 0;
+                }
+            }
+            if('btnCartao' == id){
+                if(ultimaFormaPagamento == 0){
+                    document.getElementById(id).style.backgroundColor = 'rgb(6, 20, 151)';
+                    document.getElementById(id).style.color = 'rgb(200, 207, 245)';
+                    ultimaFormaPagamento = id;
+                    return 0;
+                }
+                if(ultimaFormaPagamento == id){
+                    document.getElementById(id).style.backgroundColor = 'rgb(236, 226, 234)';
+                    document.getElementById(id).style.color = 'rgb(73, 53, 67)';
+                    ultimaFormaPagamento = 0;
+                    return 0;
+                }
+                else {
+                    this.formaDePagamento(ultimaFormaPagamento)
+                    this.formaDePagamento(id);
+                    return 0;
+                }
+            }
+            if('btniFood' == id){
+                if(ultimaFormaPagamento == 0){
+                    document.getElementById(id).style.backgroundColor = 'rgb(160, 1, 1)';
+                    document.getElementById(id).style.color = 'white';
+                    ultimaFormaPagamento = id;
+                    return 0;
+                }
+                if(ultimaFormaPagamento == id){
+                    document.getElementById(id).style.backgroundColor = 'rgb(236, 226, 234)';
+                    document.getElementById(id).style.color = 'rgb(73, 53, 67)';
+                    ultimaFormaPagamento = 0;
+                    return 0;
+                }
+                else {
+                    this.formaDePagamento(ultimaFormaPagamento)
+                    this.formaDePagamento(id);
+                    return 0;
+                }
+            }
+            if('btnFidelidade' == id){
+                alert('Em desenvolvimento, por favor aguarde.')
+            }
+            
+        }
+
+        opcoesComanda(id){
+            var inputDescontar = parseFloat(document.getElementById('inputDescontar').value);
+            var totalRestante = parseFloat(document.getElementById('id-total-aberto-'+idUltimaComanda).innerText);
+            console.log('total restante = '+totalRestante)
+            if(id == 'btnDescontar'){
+                if(inputDescontar<=0 && ultimaFormaPagamento==0){
+                    alert('Nenhum valor ou forma de pagamento selecionada.')
+                    return 0;
+                }
+                if(totalRestante<=0){
+                    alert('Comanda vazia.')
+                    return 0;
+                }
+                if(inputDescontar<=0){
+                    alert('Digite um valor maior que 0')
+                    return 0;
+                }
+                if(ultimaFormaPagamento==0){
+                    alert('Selecione uma forma de pagamento')
+                    return 0;
+                }
+                else{
+                    if(inputDescontar>totalRestante && ultimaFormaPagamento=='btnDinheiro'){
+                        var troco = parseFloat(inputDescontar-totalRestante).toFixed(2);
+                        alert('Troco: R$ '+ troco)
+                        this.descontarDebito(ultimaFormaPagamento,inputDescontar);
+                        atualizarTotalCaixa();
+                        fecharComanda();
+                    }
+                    if(inputDescontar>totalRestante && ultimaFormaPagamento!='btnDinheiro'){
+                        alert('Valor digitado maior que o Total em Aberto.')
+                    }
+                    if(inputDescontar<totalRestante){
+                        this.descontarDebito(ultimaFormaPagamento,inputDescontar);
+                    }
+                    if(inputDescontar==totalRestante){
+                        this.descontarDebito(ultimaFormaPagamento,inputDescontar);
+                        atualizarTotalCaixa();
+                        fecharComanda();
+                    }
+                    
+                    document.getElementById('inputDescontar').value = '';
+                    this.formaDePagamento(ultimaFormaPagamento);
+                }
+            }
+            if(id == 'btnVoltar'){
+                this.formaDePagamento(ultimaFormaPagamento);
+                fecharResumo();
+            }
+        }
+
+        descontarDebito(ultimaFormaPagamento,inputDescontar){
+            var totalRes = document.getElementById('id-total-aberto-'+idUltimaComanda).innerText;
+            if(inputDescontar>=totalRes){
+                inputDescontar = totalRes;
+            }
+            inputDescontar = parseFloat(inputDescontar).toFixed(2)
+            var formaDePagamento = document.createElement("p")
+            var valorDescontado = document.createElement("p")
+            formaDePagamento.textContent = this.nomePagamento(ultimaFormaPagamento);
+            valorDescontado.textContent = 'R$ '+inputDescontar;
+            document.getElementById('div9-resumo-'+idUltimaComanda).appendChild(formaDePagamento)
+            document.getElementById('div10-resumo-'+idUltimaComanda).appendChild(valorDescontado)
+            produto.descontados[produto.numPagamentos] = {inputDescontar,idUltimaComanda,ultimaFormaPagamento}
+            produto.numPagamentos++;
+            var atualizarTotal = parseFloat(totalRes - inputDescontar).toFixed(2);
+            document.getElementById('id-total-aberto-'+idUltimaComanda).innerText = atualizarTotal;
+        }
+
+        nomePagamento(ultimaFormaPagamento){
+            if(ultimaFormaPagamento == 'btnDinheiro'){
+                var nome = 'Dinheiro';
+                return nome;
+            }
+            if(ultimaFormaPagamento == 'btnPix'){
+                var nome = 'Pix';
+                return nome;
+            }
+            if(ultimaFormaPagamento == 'btnCartao'){
+                var nome = 'Cartão';
+                return nome;
+            }
+            if(ultimaFormaPagamento == 'btniFood'){
+                var nome = 'iFood';
+                return nome;
+            }
+            
+        }
+    }
+
+    var produto = new Produto();
+</script>
+</html>

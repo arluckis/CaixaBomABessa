@@ -12,10 +12,23 @@
 <body>
     
     <div class="top-pagina">
-        <div class="estilo corPrimaria" id="saldo">
-            <h2 class="container" id="esqueletoSaldo">R$ <h2 class="container" data-visible="1" id="valorCaixa">0.00</h2> </h2> <img  id="view" src="img/eye-regular.svg" alt="view" onclick="view()">
+        <div class="estilo corPrimaria estiloCentral" id="central">
+            <div class="linha estiloCentral " id="saldo">
+                <h2 class="container" id="esqueletoSaldo">R$ 
+                    <h2 class="container valorCaixaBefore" data-visible="1" id="valorCaixa">0.00</h2> 
+                </h2>
+                <img  id="view" src="img/eye-regular.svg" alt="view" onclick="view()">
+            </div>
+            <p class="estiloAvisoComanda" id="avisoComandaAcai" style="margin-left: 90px;">Insira um valor superior a 0</p>
+            <p class="estiloAvisoComanda" id="avisoSelecioneComanda" style="margin-left: 35px;">Selecione uma das comanda para excluir</p>
+            <p class="estiloAvisoComanda" id="avisoSemComanda" style="margin-left: 90px;"> Sem comanda no momento</p>
+            <p class="estiloAvisoComanda" id="avisoSemNada" style="margin-left: 55px;">Preencha os campos de pagamento</p>
+            <p class="estiloAvisoComanda" id="avisoComandaVazia" style="margin-left: 110px;">A Comanda está vazia</p>
+            <p class="estiloAvisoComanda" id="avisoComandaInput0" style="margin-left: 80px;">Valor a descontar não inserido</p>
+            <p class="estiloAvisoComanda" id="avisoComandaPagamento0" style="margin-left: 70px;">Selecione a forma de pagamento</p>
+            <p class="estiloAvisoComanda" id="avisoDesejaExcluir" style="margin-left: 90px;">Deseja mesmo excluir a comanda?</p>
         </div>
-        <div class="estilo corPrimaria" id="home" onclick="fecharComanda()"><img src="img/casa.png"  id="imgHome"></div>
+        <div class="estilo corPrimaria home" id="inicio"  onclick="fecharComanda()"><img src="img/casa.png"  id="imgHome"></div>
     </div>
     
 
@@ -103,6 +116,7 @@
         
 
     </div>
+
     <p id="version">Versão 1.0</p>
 </body>
 <script>
@@ -160,29 +174,34 @@
     var idUltimaComanda = 'nenhum';
 
     function abrirComanda(idComanda){
-        var id = idComanda.id;
-        document.getElementById("produtos").classList.remove('ocultar');
-        document.getElementById(id).classList.remove('ocultar');
-        document.getElementById("telaPrincipal").classList.add('ocultar');
-        document.getElementById("finalizar").classList.add('ocultar');
-        if (idUltimaComanda!='nenhum'){
-            document.getElementById(idUltimaComanda).classList.add('ocultar');
-            document.getElementById('div1-resumo-'+idUltimaComanda).classList.add('ocultar');
-        }
-        if(id == idUltimaComanda){
-            fecharComanda();
-            idUltimaComanda = 'nenhum';
-            opcoesBtnComanda('outrosBtn');
-            return 0;
+        if(excluirUmaComanda==1){
+            alert('excluir essa comanda')
+            excluirUmaComanda = 0;
+        } else {
+            var id = idComanda.id;
+            document.getElementById("produtos").classList.remove('ocultar');
+            document.getElementById(id).classList.remove('ocultar');
+            document.getElementById("telaPrincipal").classList.add('ocultar');
+            document.getElementById("finalizar").classList.add('ocultar');
+            if (idUltimaComanda!='nenhum'){
+                document.getElementById(idUltimaComanda).classList.add('ocultar');
+                document.getElementById('div1-resumo-'+idUltimaComanda).classList.add('ocultar');
+            }
+            if(id == idUltimaComanda){
+                fecharComanda();
+                idUltimaComanda = 'nenhum';
+                opcoesBtnComanda('outrosBtn');
+                return 0;
         }
         idUltimaComanda = id;
+        }
         opcoesBtnComanda('outrosBtn');
     }
     var numBalcao = 1;
     var numDelivery = 1;
     var numRetirada = 1;
     var numComanda = 1;
-    var qntComandas = 0;
+    var arrayComandas = [];
     function opcoesBtnComanda(id){
         document.getElementById('nomeComanda').innerText = 'Defina o tipo de comanda:'
         var clicado = document.getElementById("btnAdicionar").dataset.clicado;
@@ -384,20 +403,39 @@
         document.getElementById(idbtnComanda).appendChild(contadorTypeComanda);
         document.getElementById(idbtnComanda).appendChild(nomeCliente);
         criarPaginaFinalizarComanda();
+        arrayComandas[numComanda-1] = numComanda;
         numComanda++;
-        qntComandas++;
     }
+    var excluirUmaComanda = 0;
+
     function excluirComanda(){
-            if(qntComandas==0){
-                alert('Não há comandas abertas.');
+            if(arrayComandas.length==0){
+                animacaoCentral('avisoSemComanda','avisoComandaAnimation');
+            
             }
             else{
-                selecionarComanda();
+                animacaoCentral('avisoSelecioneComanda','avisoComandaAnimation');
+                excluirUmaComanda = 1;
             }
         }
 
-    function selecionarComanda(){
-        alert('oi');
+    function animacaoCentral(idAlerta,classAnimation){
+        document.getElementById('central').classList.add('centralAnimacao');
+                document.getElementById('inicio').classList.add('homeAnimation');
+                document.getElementById('valorCaixa').classList.add('valorCaixaAnimation')
+                document.getElementById('saldo').classList.add('estiloCentralAnimacao');
+                document.getElementById(idAlerta).classList.add(classAnimation);
+                
+                setTimeout(function (){
+                document.getElementById(idAlerta).classList.remove(classAnimation);
+                }, 3400)
+                
+                setTimeout(function () {
+                document.getElementById('central').classList.remove('centralAnimacao');
+                document.getElementById('inicio').classList.remove('homeAnimation');
+                document.getElementById('valorCaixa').classList.remove('valorCaixaAnimation')
+                document.getElementById('saldo').classList.remove('estiloCentralAnimacao');
+                }, 4000);
     }
 
 
@@ -515,12 +553,7 @@
                 return 1;
             }
             else{
-                var novoParagrafo = document.createElement("p")
-                novoParagrafo.textContent = "Por favor, informe um valor superior a 0.";
-                document.getElementById("erro").appendChild(novoParagrafo)
-                setTimeout(function() {
-                document.getElementById("erro").removeChild(novoParagrafo);
-                }, 3000)
+                animacaoCentral('avisoComandaAcai','avisoComandaAnimation');
                 return 0;
             }
         }
@@ -649,19 +682,19 @@
             console.log('total restante = '+totalRestante)
             if(id == 'btnDescontar'){
                 if(inputDescontar<=0 && ultimaFormaPagamento==0){
-                    alert('Nenhum valor ou forma de pagamento selecionada.')
+                    animacaoCentral('avisoSemNada','avisoComandaAnimation');
                     return 0;
                 }
                 if(totalRestante<=0){
-                    alert('Comanda vazia.')
+                    animacaoCentral('avisoComandaVazia','avisoComandaAnimation');
                     return 0;
                 }
                 if(inputDescontar<=0){
-                    alert('Digite um valor maior que 0')
+                    animacaoCentral('avisoComandaInput0','avisoComandaAnimation');
                     return 0;
                 }
                 if(ultimaFormaPagamento==0){
-                    alert('Selecione uma forma de pagamento')
+                    animacaoCentral('avisoComandaPagamento0','avisoComandaAnimation');
                     return 0;
                 }
                 else{

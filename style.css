@@ -9,6 +9,7 @@ body{
 
 .top-pagina{
     display: flex;
+    margin-top: 20px;
 }
 
 .estilo{
@@ -27,12 +28,19 @@ body{
     background-color: rgb(236, 226, 234) ;
 }
 
-#home{
+.painelExcluir{
+background-color: rgba(0, 0, 0, 0.256);
+}
+
+.home{
     height: 50px;
     width: 50px;
     border-radius: 100%;
-    top: 20px;
-    left: 125px;
+    left: -130px;
+    transition: left 1.11s cubic-bezier(0.68, -0.2, 0.27, 1.55);
+}
+.homeAnimation{
+    left: -240px;
 }
 
 #imgHome{
@@ -43,17 +51,45 @@ body{
     cursor: pointer;
 }
 
-#saldo{
-    top: 20px;
+.estiloCentral{
     position: absolute;
     left: 50%;
     transform: translate(-50%);
     border-radius: 50px;
     width: 180px;
     height: 50px;
-    cursor: context-menu;
-    
+    cursor: context-menu; 
+    transition: filter 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55);
 }
+.estiloAvisoComanda{
+    top: 12px;
+    position:absolute;
+    filter: opacity(0);
+    transition: filter 1.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+.avisoComandaAnimation{
+    filter: opacity(1);
+}
+.estiloCentralAnimacao{
+    filter: opacity(0.0);
+}
+
+#central{
+    transition: width 1s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+.centralAnimacao {
+    width: 400px;
+}
+
+
+#central p{
+    margin-top: auto;
+    margin-bottom: auto;
+    font-weight: bold;
+    font-size: 18px;
+}
+
 #view{
     position: relative;
     width: 20px;
@@ -67,11 +103,20 @@ body{
 
 div#pai{
     display: flex;
-    margin-top: 70px;
+    margin-top: 20px;
     width: 850px;
     position: relative;
     margin-left:auto;
     margin-right:auto;
+}
+
+.valorCaixaBefore{
+    margin-left: 10px;
+    transition: margin-left 1s ease-in-out;
+}
+
+.valorCaixaAnimation{
+    margin-left: -70px;
 }
 
 div#telaPrincipal{

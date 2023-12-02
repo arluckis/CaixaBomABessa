@@ -26,7 +26,6 @@
             <p class="estiloAvisoComanda" id="avisoComandaVazia" style="margin-left: 110px;">A Comanda está vazia</p>
             <p class="estiloAvisoComanda" id="avisoComandaInput0" style="margin-left: 80px;">Valor a descontar não inserido</p>
             <p class="estiloAvisoComanda" id="avisoComandaPagamento0" style="margin-left: 70px;">Selecione a forma de pagamento</p>
-            <p class="estiloAvisoComanda" id="avisoDesejaExcluir" style="margin-left: 90px;">Deseja mesmo excluir a comanda?</p>
         </div>
         <div class="estilo corPrimaria home" id="inicio"  onclick="fecharComanda()"><img src="img/casa.png"  id="imgHome"></div>
     </div>
@@ -113,12 +112,21 @@
             <button id="typeRetirada" onclick="opcoesBtnComanda(id)">Retirada</button>
         </div>
         <div><input type="text" id="inputNomeComanda" placeholder="Nome da Comanda (opcional)" maxlength="14"></div>
-        
-
     </div>
-
+    <div class="confirmarExclusao ocultar" id="telaConfirmacao">
+        <div><h1>CONFIRMAÇÃO</h1>
+            <h1> Deseja realmente excluir a comanda?</h1>
+        </div>
+        <div class="linha">
+            <div class="corpoDivConfirmacao" id="excluir" onclick=""><img class="iconesConfirmacao" src="img/trash.png" alt=""></div>
+            <div class="corpoDivConfirmacao" id="cancelar" onclick=""><img class="iconesConfirmacao" src="img/resignado.png" alt=""></div>
+        </div>
+    </div>
     <p id="version">Versão 1.0</p>
+
 </body>
+
+
 <script>
     function view(){
         var visible = document.getElementById("valorCaixa").dataset.visible
@@ -175,8 +183,7 @@
 
     function abrirComanda(idComanda){
         if(excluirUmaComanda==1){
-            alert('excluir essa comanda')
-            excluirUmaComanda = 0;
+            document.getElementById('telaConfirmacao').classList.remove('ocultar');
         } else {
             var id = idComanda.id;
             document.getElementById("produtos").classList.remove('ocultar');
@@ -418,24 +425,28 @@
                 excluirUmaComanda = 1;
             }
         }
-
+        animacaoiniciada = 0;
     function animacaoCentral(idAlerta,classAnimation){
-        document.getElementById('central').classList.add('centralAnimacao');
-                document.getElementById('inicio').classList.add('homeAnimation');
-                document.getElementById('valorCaixa').classList.add('valorCaixaAnimation')
-                document.getElementById('saldo').classList.add('estiloCentralAnimacao');
-                document.getElementById(idAlerta).classList.add(classAnimation);
-                
-                setTimeout(function (){
+        animacaoiniciada++;
+        if(animacaoiniciada==1){
+            console.log(animacaoiniciada)
+            document.getElementById('central').classList.add('centralAnimacao');
+            document.getElementById('inicio').classList.add('homeAnimation');
+            document.getElementById('valorCaixa').classList.add('valorCaixaAnimation')
+            document.getElementById('saldo').classList.add('estiloCentralAnimacao');
+            document.getElementById(idAlerta).classList.add(classAnimation);
+            setTimeout(function (){
                 document.getElementById(idAlerta).classList.remove(classAnimation);
-                }, 3400)
+            }, 2000)
                 
-                setTimeout(function () {
+            setTimeout(function () {
                 document.getElementById('central').classList.remove('centralAnimacao');
                 document.getElementById('inicio').classList.remove('homeAnimation');
                 document.getElementById('valorCaixa').classList.remove('valorCaixaAnimation')
                 document.getElementById('saldo').classList.remove('estiloCentralAnimacao');
-                }, 4000);
+                animacaoiniciada--;
+            }, 2500);
+        }         
     }
 
 

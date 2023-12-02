@@ -68,9 +68,8 @@
                 <button id="8" class="btnCan" onclick="produto.opcoes(id)"> Cancelar</button>
             </div>
         </div>
-        
-        <div class="ocultar" id="finalizar">
-            <div><h1>FECHAMENTO DA COMANDA</h1>
+        <div class="ocultar corSecundaria" id="finalizar">
+            <div class="linha">
                 <div id="conteudoFinalizar">
                     <div>
                         <div class="corpoDiv" id="divPagamento">
@@ -92,13 +91,15 @@
                                 <input type="number" id="inputDescontar" placeholder="Ex.: R$ 7.06">
                             </div>
                         </div>
-                        <div id="btnDescontar" onclick="produto.opcoesComanda(id)"><h2>Descontar</h2> </div>
                     </div> 
-                    <div id="localResumos">
-
-                    </div>
-                    <div class="corPrimaria" id="btnVoltar" onclick="produto.opcoesComanda(id)"><h2>Voltar</h2></div>
                 </div>
+                <div id="localResumos">
+            
+                </div>
+            </div>
+            <div style="display: flex;">
+                <div id="btnDescontar" onclick="produto.opcoesComanda(id)"><h2>Descontar</h2></div>
+                <div class="corPrimaria" id="btnVoltar" onclick="produto.opcoesComanda(id)"><h2>Voltar</h2></div>
             </div>
         </div>
     </div>
@@ -117,8 +118,8 @@
             <h1> Deseja realmente excluir a comanda?</h1>
         </div>
         <div class="linha">
-            <button class="corpoDivConfirmacao" id="excluir" onclick=""><img class="iconesConfirmacao" src="img/trash.png" alt=""></button>
-            <button class="corpoDivConfirmacao" id="cancelar" onclick=""><img class="iconesConfirmacao" src="img/resignado.png" alt=""></button>
+            <button class="corpoDivConfirmacao" id="excluir" onclick="exclusaoConfirmada()"><img class="iconesConfirmacao" src="img/trash.png" alt=""></button>
+            <button class="corpoDivConfirmacao" id="cancelar" onclick="cancelarExcluirComanda()"><img class="iconesConfirmacao" src="img/resignado.png" alt=""></button>
         </div>
     </div>
     <p id="version">Versão 1.0</p>
@@ -409,7 +410,7 @@
         document.getElementById(idbtnComanda).appendChild(contadorTypeComanda);
         document.getElementById(idbtnComanda).appendChild(nomeCliente);
         criarPaginaFinalizarComanda();
-        arrayComandas[numComanda-1] = numComanda;
+        arrayComandas[numComanda-1] = 'Comanda'+numComanda;
         numComanda++;
     }
     var excluirUmaComanda = 0;
@@ -433,7 +434,26 @@
                 }
             }
         }
-        animacaoiniciada = 0;
+
+    function exclusaoConfirmada(){
+        cancelarExcluirComanda(); // para remover a tela confirmação e a animação da central
+        var objetoBtn = document.getElementById('btn'+idUltimaComanda);
+        var parent = document.getElementById('listaComandas');
+        parent.removeChild(objetoBtn)
+        var width = document.getElementById('listaComandas').offsetWidth;
+        width -= 110;
+        document.getElementById('listaComandas').style.width = width+'px';
+
+        excluirUmaComanda = 0;
+        for(let i=0; i<arrayComandas.length; i++){
+            if(arrayComandas[i] == idUltimaComanda){
+                arrayComandas.splice(i,1);
+            }
+        }
+        fecharComanda(idUltimaComanda);
+    }
+
+    animacaoiniciada = 0;
     function animacaoCentral(idAlerta,classAnimation){
         animacaoiniciada++;
         if(animacaoiniciada==1){
@@ -459,6 +479,7 @@
 
     function cancelarExcluirComanda(){
         excluirUmaComanda = 0;
+        document.getElementById('telaConfirmacao').classList.add('ocultar');
         document.getElementById('central').classList.remove('centralAnimacao');
         document.getElementById('inicio').classList.remove('homeAnimation');
         document.getElementById('valorCaixa').classList.remove('valorCaixaAnimation')
@@ -536,6 +557,7 @@
             document.getElementById(item.id).appendChild(descricaoItem);
             document.getElementById(item.id).appendChild(precoItem);
             document.getElementById(item.id).appendChild(imgLixeira);
+            
             this.atualizarPreco();
             
         }
@@ -730,7 +752,7 @@
                         alert('Troco: R$ '+ troco)
                         this.descontarDebito(ultimaFormaPagamento,inputDescontar);
                         atualizarTotalCaixa();
-                        fecharComanda();
+                        exclusaoConfirmada()
                     }
                     if(inputDescontar>totalRestante && ultimaFormaPagamento!='btnDinheiro'){
                         alert('Valor digitado maior que o Total em Aberto.')
@@ -741,7 +763,7 @@
                     if(inputDescontar==totalRestante){
                         this.descontarDebito(ultimaFormaPagamento,inputDescontar);
                         atualizarTotalCaixa();
-                        fecharComanda();
+                        exclusaoConfirmada();
                     }
                     
                     document.getElementById('inputDescontar').value = '';

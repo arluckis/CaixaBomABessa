@@ -199,7 +199,7 @@ div#telaPrincipal{
     width: 300px;
     height: 300px;
     position: fixed;
-    top: 230px;
+    top: 160px;
     margin-left: 50%;
     transform: translate(-50%);
     border-radius: 20px;
@@ -231,13 +231,14 @@ div#telaPrincipal{
     margin-top: 30px;
     border-radius: 20px;
     border: 0px;
-    background-color: rgb(220, 208, 226);
+    background-color: rgb(235, 229, 238);
     color: rgb(103, 66, 98);
     margin-left: 5px;
     margin-right: 5px;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.351);
     font-weight: bold;
     margin-bottom: 20px;
+    transition: background-color 0.2s;
 }
 
 #menuCriarComanda button:hover{
@@ -281,7 +282,7 @@ div#telaPrincipal{
     width: 250px;
     height: 120px;
     background-color: rgb(233, 225, 237);
-    box-shadow: 0px 0px 3px rgba(77, 44, 92, 0.562);
+    box-shadow: 0px 0px 5px rgba(119, 112, 122, 0.176);
     border-radius: 40px;
     position:fixed;
     top: 480px;
@@ -318,23 +319,24 @@ div#telaPrincipal{
 }
 
 .menus{
-    color: rgb(202, 182, 199);
+    color: rgb(117, 89, 144);
     width: 80vw;
     max-width: 500px;
     height: 50vw;
     border-radius: 20px;
     position: fixed;
     transition: filter 1s ease-in-out;
+    box-shadow: 0px 0px 300px rgba(119, 112, 122, 0.176);
     left: 50%;
     transform: translate(-50%);
-    margin-top: 170px;
+    margin-top: 180px;
 }
 
 
 .top-menu{
     width: 100%;
     height: 10px;
-    margin-top: 5px;
+    margin-top: 0px;
     color: rgb(64, 56, 72);
     border-radius: 20px 20px 0 0;
     position: sticky;
@@ -343,15 +345,19 @@ div#telaPrincipal{
 }
 
 .tituloComanda{
+    margin-top: 10px;
     text-align: center;
-    font-size: 35px;
-    color: rgb(64, 56, 72);
+    font-family: sans-serif;
+    font-size: 25px;
+    font-weight: bold;
+    color: rgb(117, 89, 144);
+    text-transform: uppercase;
 }
 
 .bot-menu{
     width: 100%;
     height: 50px;
-    color: rgb(64, 56, 72);
+    color: rgb(138, 116, 158);
     position: sticky;
     bottom: 0;
     cursor: context-menu;
@@ -380,16 +386,17 @@ h1{
     max-height: 70px;
     border: none;
     border-radius: 50px;
-    background-color: rgb(239, 233, 236);
-    color: rgb(99, 30, 88);
+    background-color: rgba(210, 209, 209, 0.104);
+    color: rgb(97, 54, 137);
     justify-content: space-evenly;
     cursor: pointer;
     font-weight:100;
     font-size: 17px;
+    transition: background-color 0.1s;
 }
 
 #produtos button:hover{
-    background-color: rgba(101, 31, 91, 0.89);
+    background-color: rgba(210, 209, 209, 0.104);
     color: aliceblue;
 }
 
@@ -405,7 +412,7 @@ h1{
 }
 
 .btnCan{
-    background-color: rgb(246, 243, 246);
+    background-color: rgba(210, 209, 209, 0.104);
     color: rgb(99, 30, 88);
 }
 .btnEnv{
@@ -413,7 +420,7 @@ h1{
 }
 
 .btnCan:hover{
-    background-color: rgb(246, 241, 245);
+    background-color: rgba(220, 218, 220, 0.268);
     color: rgb(99, 30, 88);
 }
 .btnEnv:hover{
@@ -423,7 +430,7 @@ h1{
 #pesoAcai input{
     width: 80%;
     height: 40px;
-    background-color: rgb(246, 243, 246);
+    background-color: rgba(210, 209, 209, 0.104);
     color: rgb(99, 30, 88);
     border: 0px;
     font-size: 20px;
@@ -445,7 +452,7 @@ h1{
 }
 
 .div-itens{
-    background-color: rgb(240, 233, 238);
+    background-color: rgba(210, 209, 209, 0.104);
     color: rgb(99, 30, 88);
     width: 92%;
     height: 50px;
@@ -460,7 +467,7 @@ h1{
 }
 
 .div-itens:hover{
-    background-color: rgb(218, 203, 218);
+    background-color: rgba(218, 203, 218, 0.259);
     padding: 3px;
 }
 
@@ -494,8 +501,8 @@ h1{
 }
 
 .finalizarComanda{
-    background-color: rgb(247, 241, 245);
-    color: rgb(64, 56, 72);
+    background-color: rgba(208, 207, 207, 0.144);
+    color: rgb(68, 33, 103);
     border: none;
     border-radius: 50px;
     font-size: 12px;

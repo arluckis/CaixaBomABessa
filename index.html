@@ -420,12 +420,17 @@
             
             }
             else{
-                document.getElementById('central').classList.add('centralAnimacao');
-                document.getElementById('inicio').classList.add('homeAnimation');
-                document.getElementById('valorCaixa').classList.add('valorCaixaAnimation')
-                document.getElementById('saldo').classList.add('estiloCentralAnimacao');
-                document.getElementById('avisoSelecioneComanda').classList.add('avisoComandaAnimation');
-                excluirUmaComanda = 1;
+                if(excluirUmaComanda==1){
+                    cancelarExcluirComanda()
+                }
+                else{    
+                    document.getElementById('central').classList.add('centralAnimacao');
+                    document.getElementById('inicio').classList.add('homeAnimation');
+                    document.getElementById('valorCaixa').classList.add('valorCaixaAnimation')
+                    document.getElementById('saldo').classList.add('estiloCentralAnimacao');
+                    document.getElementById('avisoSelecioneComanda').classList.add('avisoComandaAnimation');
+                    excluirUmaComanda = 1;
+                }
             }
         }
         animacaoiniciada = 0;
@@ -452,6 +457,14 @@
         }         
     }
 
+    function cancelarExcluirComanda(){
+        excluirUmaComanda = 0;
+        document.getElementById('central').classList.remove('centralAnimacao');
+        document.getElementById('inicio').classList.remove('homeAnimation');
+        document.getElementById('valorCaixa').classList.remove('valorCaixaAnimation')
+        document.getElementById('saldo').classList.remove('estiloCentralAnimacao');
+        document.getElementById('avisoSelecioneComanda').classList.remove('avisoComandaAnimation');
+    }
 
     var ultimaFormaPagamento = 0;
     class Produto {

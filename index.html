@@ -10,7 +10,16 @@
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    
+    <div id="listaComandas">
+        <div class="corPrimaria adicionar btnAddComanda" data-clicado="0" id="btnAdicionar" onclick="opcoesBtnComanda(id)">
+            <p>Adicionar</p>
+            <div id="iconeAdd">+</div>
+        </div>
+        <div class="adicionar corCancelar btnAddComanda"  id="btnCancelar" onclick="opcoesBtnComanda(id)">
+            <p>Cancelar</p>
+            <div id="iconeAdd">-</div>
+        </div>
+    </div>
     <div class="top-pagina">
         <div class="estilo corPrimaria estiloCentral" id="central">
             <div class="linha estiloCentral " id="saldo">
@@ -60,16 +69,6 @@
             </div>
         </div>
         
-        <div id="listaComandas">
-            <div class="corPrimaria adicionar btnAddComanda" data-clicado="0" id="btnAdicionar" onclick="opcoesBtnComanda(id)">
-                <p>Adicionar</p>
-                <div id="iconeAdd">+</div>
-            </div>
-            <div class="adicionar corCancelar btnAddComanda"  id="btnCancelar" onclick="opcoesBtnComanda(id)">
-                <p>Cancelar</p>
-                <div id="iconeAdd">-</div>
-            </div>
-        </div>
         <div class="ocultar" id="finalizar">
             <div><h1>FECHAMENTO DA COMANDA</h1>
                 <div id="conteudoFinalizar">
@@ -421,7 +420,11 @@
             
             }
             else{
-                animacaoCentral('avisoSelecioneComanda','avisoComandaAnimation');
+                document.getElementById('central').classList.add('centralAnimacao');
+                document.getElementById('inicio').classList.add('homeAnimation');
+                document.getElementById('valorCaixa').classList.add('valorCaixaAnimation')
+                document.getElementById('saldo').classList.add('estiloCentralAnimacao');
+                document.getElementById('avisoSelecioneComanda').classList.add('avisoComandaAnimation');
                 excluirUmaComanda = 1;
             }
         }

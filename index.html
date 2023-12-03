@@ -68,8 +68,9 @@
                 <button id="8" class="btnCan" onclick="produto.opcoes(id)"> Cancelar</button>
             </div>
         </div>
-        <div class="ocultar corSecundaria" id="finalizar">
-            <div class="linha">
+        
+        <div class="ocultar" id="finalizar">
+            <div><h1>FECHAMENTO DA COMANDA</h1>
                 <div id="conteudoFinalizar">
                     <div>
                         <div class="corpoDiv" id="divPagamento">
@@ -91,15 +92,13 @@
                                 <input type="number" id="inputDescontar" placeholder="Ex.: R$ 7.06">
                             </div>
                         </div>
+                        <div id="btnDescontar" onclick="produto.opcoesComanda(id)"><h2>Descontar</h2> </div>
                     </div> 
+                    <div id="localResumos">
+
+                    </div>
+                    <div class="corPrimaria" id="btnVoltar" onclick="produto.opcoesComanda(id)"><h2>Voltar</h2></div>
                 </div>
-                <div id="localResumos">
-            
-                </div>
-            </div>
-            <div style="display: flex;">
-                <div id="btnDescontar" onclick="produto.opcoesComanda(id)"><h2>Descontar</h2></div>
-                <div class="corPrimaria" id="btnVoltar" onclick="produto.opcoesComanda(id)"><h2>Voltar</h2></div>
             </div>
         </div>
     </div>
@@ -410,7 +409,7 @@
         document.getElementById(idbtnComanda).appendChild(contadorTypeComanda);
         document.getElementById(idbtnComanda).appendChild(nomeCliente);
         criarPaginaFinalizarComanda();
-        arrayComandas[numComanda-1] = 'Comanda'+numComanda;
+        arrayComandas[numComanda-1] = numComanda;
         numComanda++;
     }
     var excluirUmaComanda = 0;
@@ -443,14 +442,9 @@
         var width = document.getElementById('listaComandas').offsetWidth;
         width -= 110;
         document.getElementById('listaComandas').style.width = width+'px';
-
-        excluirUmaComanda = 0;
-        for(let i=0; i<arrayComandas.length; i++){
-            if(arrayComandas[i] == idUltimaComanda){
-                arrayComandas.splice(i,1);
-            }
-        }
         fecharComanda(idUltimaComanda);
+        excluirUmaComanda = 0;
+        
     }
 
     animacaoiniciada = 0;
